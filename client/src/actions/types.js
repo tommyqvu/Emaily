@@ -1,1 +1,2 @@
 export const FETCH_USER = "FETCH_USER"
+export const STRIPE_PAYMENT = "STRIPE_PAYMENT"
