@@ -2,32 +2,50 @@ import React, { Fragment } from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import Payments from './Payments';
-const Header = ({ auth }) => (
-  <nav>
-    <div className='nav-wrapper'>
-      <Link to={auth ? '/surveys' : '/'} className='brand-logo'>
-        Logo
-      </Link>
-      <ul id='nav-mobile' className='right hide-on-med-and-down'>
-        {auth ? (
+
+class Header extends React.Component {
+  renderContent() {
+    switch (this.props.auth) {
+      case null:
+        return;
+      case false:
+        return (
+          <li>
+            <a href='/auth/google'>Login With Google</a>
+          </li>
+        );
+      default:
+        return (
           <Fragment>
             <li>
               <Payments />
             </li>
-            <li style={{ margin: '0px 10px' }}>Credits: {auth.credits}</li>
+            <li style={{ margin: '0px 10px' }}>
+              Credits: {this.props.auth.credits}
+            </li>
             <li>
-              <Link to={'/api/logout'}>Logout</Link>
+              <a href={'/api/logout'}>Logout</a>
             </li>
           </Fragment>
-        ) : (
-          <li>
-            <Link to='/auth/google'>Login With Google</Link>
-          </li>
-        )}
-      </ul>
-    </div>
-  </nav>
-);
+        );
+    }
+  }
+  render() {
+    const { auth } = this.props;
+    return (
+      <nav>
+        <div className='nav-wrapper'>
+          <Link to={auth ? '/surveys' : '/'} className='brand-logo'>
+            Logo
+          </Link>
+          <ul id='nav-mobile' className='right hide-on-med-and-down'>
+            {this.renderContent()}
+          </ul>
+        </div>
+      </nav>
+    );
+  }
+}
 
 const mapStateToProps = ({ auth }) => ({ auth });
 

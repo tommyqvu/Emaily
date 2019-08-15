@@ -7,6 +7,8 @@ import reduxThunk from 'redux-thunk';
 
 import App from './components/App';
 import reducers from './reducers/index';
+import axios from 'axios';
+window.axios = axios;
 
 const store = createStore(reducers, {}, applyMiddleware(reduxThunk));
 
@@ -18,3 +20,17 @@ ReactDOM.render(
   document.querySelector('#root'),
 );
 
+
+/*
+Testing sendgrid
+
+const survey = {
+  title: 'my title',
+  subject: 'my subject',
+  recipients: 'tomvu1805@gmail.com',
+  body: "Email's body"
+};
+
+axios.post("/api/surveys", survey)
+
+*/

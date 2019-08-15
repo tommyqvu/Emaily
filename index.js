@@ -6,10 +6,15 @@ const bodyParser = require('body-parser');
 
 const keys = require('./config/key');
 const app = express();
+
+require('./models/Survey');
+require('./models/User');
+
+
 const authRoutes = require('./routes/authRoutes');
 const paymentRoutes = require('./routes/paymentRoutes');
+const surveyRoutes = require('./routes/surveyRoutes');
 
-require('./models/User');
 
 require('./services/passport');
 
@@ -27,6 +32,7 @@ app.use(passport.session());
 
 authRoutes(app);
 paymentRoutes(app);
+surveyRoutes(app);
 
 if (process.env.NODE_ENV === 'production') {
   app.use(express.static('client/build'));

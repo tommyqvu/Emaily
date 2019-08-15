@@ -7,4 +7,7 @@ module.exports = {
   cookieKey: process.env.cookieKey,
   STRIPE_SECRET_KEY: process.env.STRIPE_SECRET_KEY,
   STRIPE_PUB_KEY: process.env.STRIPE_PUB_KEY,
+  SENDGRID_KEY: process.env.SENDGRID_KEY,
+  redirectDomain: process.env.redirectDomain
+
 };
