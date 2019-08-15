@@ -18,11 +18,9 @@ class Payments extends React.Component {
   }
 }
 
-const mapDispatchToProps = dispatch => {
-  return {
-    handleToken: token => dispatch(handleToken(token)),
-  };
-};
+const mapDispatchToProps = dispatch => ({
+  handleToken: token => dispatch(handleToken(token)),
+});
 
 export default connect(
   null,

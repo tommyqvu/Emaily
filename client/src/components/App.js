@@ -5,9 +5,9 @@ import { connect } from 'react-redux';
 import { fetchUser } from '../actions/index';
 
 import Header from './Header';
-import Landing from "./Landing"
-const Dashboard = () => <h2>Dashboard</h2>;
-const SurveyNew = () => <h2>SurveyNew</h2>;
+import Landing from './Landing';
+import Dashboard from './Dashboard';
+import SurveyNew from './surveys/SurveyNew';
 
 class App extends React.Component {
   componentDidMount() {
@@ -15,23 +15,21 @@ class App extends React.Component {
   }
   render() {
     return (
-      <div className='container'>
-        <BrowserRouter>
-          <div>
-            <Header />
-            <Route path='/' component={Landing} exact />
-            <Route path='/surveys' component={Dashboard} exact />
-            <Route path='/surveys/new' component={SurveyNew} />
-          </div>
-        </BrowserRouter>
-      </div>
+      <BrowserRouter>
+        <div className='container'>
+          <Header />
+          <Route path='/' component={Landing} exact />
+          <Route path='/surveys' component={Dashboard} exact />
+          <Route path='/surveys/new' component={SurveyNew} />
+        </div>
+      </BrowserRouter>
     );
   }
 }
 
-const mapDispatchToProps = dispatch => {
-  return { fetchUser: () => dispatch(fetchUser()) };
-};
+const mapDispatchToProps = dispatch => ({
+  fetchUser: () => dispatch(fetchUser()),
+});
 
 export default connect(
   null,

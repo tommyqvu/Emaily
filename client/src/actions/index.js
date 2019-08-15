@@ -26,3 +26,13 @@ export const handleToken = token => async dispatch => {
     console.log(e);
   }
 };
+
+export const submitSurvey = (formValues, history) => async dispatch => {
+  try {
+    const res = await axios.post('/api/surveys', formValues);
+    history.push("/surveys")
+    dispatch({ type: FETCH_USER, payload: res.data });
+  } catch (e) {
+    console.log(e);
+  }
+};
