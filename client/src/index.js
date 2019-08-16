@@ -8,6 +8,7 @@ import reduxThunk from 'redux-thunk';
 import App from './components/App';
 import reducers from './reducers/index';
 
+// Needs pagination, error handling, webhook in production
 
 const store = createStore(reducers, {}, applyMiddleware(reduxThunk));
 
@@ -19,10 +20,10 @@ ReactDOM.render(
   document.querySelector('#root'),
 );
 
-
 /*
 Testing sendgrid
-
+import axios from 'axios';
+window.axios = axios;
 const survey = {
   title: 'my title',
   subject: 'my subject',
