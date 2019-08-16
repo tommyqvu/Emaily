@@ -20,3 +20,6 @@ cookieKey: your_secret_cookie_key ,
   redirectDomain: "http://localhost:3000"};
   
 Use the card 4242 4242 4242 4242 to be able to pay via stripe
+
+
+Loading icon, error message, pagination, sortings and email selection are underway
