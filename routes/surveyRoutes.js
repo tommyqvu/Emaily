@@ -10,20 +10,22 @@ const template = require('../services/emailTemplates/template');
 const Survey = mongoose.model('surveys');
 
 module.exports = app => {
- 
   app.get('/api/surveys', requireLogin, async (req, res) => {
     try {
-      const {page} = req.query 
-      const surveys = await Survey.find({ _user: req.user.id }).skip((page-1)*5).limit(5).select({
-        recipients: false,
-      });
-      const count = await Survey.find({ _user: req.user.id }).countDocuments()
+      const { page } = req.query;
+      const surveys = await Survey.find({ _user: req.user.id })
+        .skip((page - 1) * 5)
+        .limit(5)
+        .select({
+          recipients: false,
+        });
+      const count = await Survey.find({ _user: req.user.id }).countDocuments();
       res.send({ surveys, count });
     } catch (e) {
       console.log(e);
     }
   });
- 
+
   app.get('/api/surveys/:surveyId/:choice', (req, res) => {
     res.send('Thank you for your opinion');
   });

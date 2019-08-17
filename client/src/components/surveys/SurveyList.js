@@ -36,7 +36,7 @@ class SurveyList extends React.Component {
         />
         {loading && <Loader />}
         {error && <div className='red-text center'>{error}</div>}
-        {surveys.reverse().map(({ _id, ...otherProps }) => {
+        {surveys.map(({ _id, ...otherProps }) => {
           
           return (
             <SurveyCard key={_id} {...otherProps}/>

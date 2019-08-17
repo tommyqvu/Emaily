@@ -7,7 +7,7 @@ const Paginator = ({ page, onDirection, lastPage }) => (
         <i className='material-icons'>chevron_left</i>
       </a>
     </li>
-    Showing {page} of {lastPage}
+    Showing page {page} of {lastPage}
     <li className={page < lastPage ? 'waves-effect' : 'disabled'}>
       <a onClick={() => onDirection('next')}>
         <i className='material-icons'>chevron_right</i>

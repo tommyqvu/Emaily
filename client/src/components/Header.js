@@ -35,8 +35,8 @@ class Header extends React.Component {
     return (
       <nav>
         <div className='nav-wrapper'>
-          <Link to={auth ? '/surveys' : '/'} className='brand-logo'>
-            Logo
+          <Link to={auth ? '/surveys' : '/'} className='brand-logo' style={{marginLeft: "10px"}}>
+            Emaily
           </Link>
           <ul id='nav-mobile' className='right hide-on-med-and-down'>
             {this.renderContent()}
