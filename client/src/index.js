@@ -4,13 +4,16 @@ import 'materialize-css/dist/css/materialize.min.css';
 import { Provider } from 'react-redux';
 import { createStore, applyMiddleware } from 'redux';
 import reduxThunk from 'redux-thunk';
-
+import logger from 'redux-logger';
 import App from './components/App';
 import reducers from './reducers/index';
 
-// Needs pagination, error handling, webhook in production
+const middlewares = [reduxThunk];
 
-const store = createStore(reducers, {}, applyMiddleware(reduxThunk));
+if (process.env.NODE_ENV === 'development') {
+  middlewares.push(logger);
+}
+const store = createStore(reducers, {}, applyMiddleware(...middlewares));
 
 ReactDOM.render(
   <Provider store={store}>

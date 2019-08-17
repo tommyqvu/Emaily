@@ -1,5 +1,11 @@
 import axios from 'axios';
-import { FETCH_USER, FETCH_SURVEYS } from './types';
+import {
+  FETCH_USER,
+  FETCH_SURVEYS_FAIL,
+  FETCH_SURVEYS_START,
+  FETCH_SURVEYS_SUCCESS,
+  SET_PAGE,
+} from './types';
 
 export const fetchUser = () => async dispatch => {
   try {
@@ -37,11 +43,35 @@ export const submitSurvey = (formValues, history) => async dispatch => {
   }
 };
 
-export const fetchSurveys = () => async dispatch => {
+export const setPage = page => dispatch => {
+  dispatch({
+    type: SET_PAGE,
+    payload: page,
+  });
+};
+
+const fetchSurveysStart = () => ({
+  type: FETCH_SURVEYS_START,
+});
+
+const fetchSurveysSuccess = surveys => ({
+  type: FETCH_SURVEYS_SUCCESS,
+  payload: surveys,
+});
+
+const fetchSurveysFail = error => ({
+  type: FETCH_SURVEYS_FAIL,
+  payload: error,
+});
+
+export const fetchSurveysAsync = page => async dispatch => {
   try {
-    const res = await axios.get('/api/surveys');
-    dispatch({ type: FETCH_SURVEYS, payload: res.data.surveys });
+    dispatch(fetchSurveysStart());
+    const {data} = await axios.get(`/api/surveys?page=${page}`);
+    dispatch(
+      fetchSurveysSuccess({ surveys: data.surveys, count: data.count }),
+    );
   } catch (e) {
-    console.log(e);
+    dispatch(fetchSurveysFail(e.message));
   }
 };
